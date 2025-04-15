@@ -1,0 +1,14 @@
+name: practie-github-actions
+
+on: push 
+
+jobs: 
+  hello-world-job:
+
+    runs-on: ubuntu-latest 
+
+    steps:
+     - name: check out repository code
+       uses: actions/chckout@v4
+     - run: echo "${Hello world}"
+      
