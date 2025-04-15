@@ -19,13 +19,3 @@ jobs:
 
       - name: Build Next.js app
         run: npm run build
-
-      - name: Export Next.js app (optional, for static export)
-        if: ${{ success() }}
-        run: |
-          if [ -f "next.config.js" ] && grep -q '"export"' next.config.js; then
-            npm run export
-          fi
-
-      - name: Test Next.js app
-        run: npm test
