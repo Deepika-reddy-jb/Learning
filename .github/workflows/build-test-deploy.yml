@@ -21,8 +21,11 @@ jobs:
         run: npm run build
 
       - name: Export Next.js app (optional, for static export)
-        run: npm run export
-        if: success() && fileExists('next.config.js') && contains(fromJSON('next.config.js').output, 'export')
+        if: ${{ success() }}
+        run: |
+          if [ -f "next.config.js" ] && grep -q '"export"' next.config.js; then
+            npm run export
+          fi
 
       - name: Test Next.js app
         run: npm test
