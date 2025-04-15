@@ -1,17 +1,28 @@
-name: build-test-deplou
+name: build-test-deploy
 
 on: push
-jobs: 
+jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: use node.js
+
+      - name: Use Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20.x'
-      - run: npm install
-      - run: npm run build
-      
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Export Next.js app (optional, for static export)
+        run: npm run export
+        if: success() && fileExists('next.config.js') && contains(fromJSON('next.config.js').output, 'export')
+
+      - name: Test Next.js app
+        run: npm test
