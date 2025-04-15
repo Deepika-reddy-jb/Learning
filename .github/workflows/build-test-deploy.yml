@@ -15,21 +15,21 @@ jobs:
           node-version: '20.x'
 
       - name: Install dependencies
-        working-directory: ./path-to-your-frontend-folder
+        working-directory: ./Learning/frontend
         run: npm install
 
       - name: Build Next.js app
-        working-directory: ./path-to-your-frontend-folder
+        working-directory: ./Learning/frontend
         run: npm run build
 
       - name: Export Next.js app (optional, for static export)
         if: ${{ success() }}
-        working-directory: ./path-to-your-frontend-folder
+        working-directory: ./Learning/frontend
         run: |
           if [ -f "next.config.js" ] && grep -q '"export"' next.config.js; then
             npm run export
           fi
 
       - name: Test Next.js app
-        working-directory: ./path-to-your-frontend-folder
+        working-directory: ./Learning/frontend
         run: npm test
